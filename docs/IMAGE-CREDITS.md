@@ -26,4 +26,4 @@ Aturan pemilihan (pemilik, 6 Okt 2026): produk ini adalah platform arsip **digit
 
 Semua foto dikonversi ke WebP (cwebp, lebar 1600 sampai 2400 px); Next.js menyajikan ukuran dan format yang sesuai layar. Foto gedung institusi (misalnya Monas) menggambarkan sektor, bukan klaim bahwa institusi tersebut adalah klien.
 
-Ikon, favicon, dan gambar Open Graph dibuat dari logo sementara di kode (`src/app/icon.svg`, `icon.tsx`, `apple-icon.tsx`, `opengraph-image.tsx`), bukan foto.
+Logo, favicon, ikon aplikasi, dan gambar Open Graph dibuat dari logo resmi di kode (`src/components/logo.tsx`, `src/app/icon.svg`, `public/brand/`), bukan foto. Panduan pemakaian logo ada di `docs/BRAND.md`.

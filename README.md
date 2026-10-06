@@ -26,10 +26,11 @@ Salin `.env.example` menjadi `.env.local` untuk lokal, dan isi nilai yang sama d
 
 ## Struktur konten
 
-- `src/lib/modules.ts`: tujuh modul (nama, fitur, peran AI, foto, layar produk). Menu, halaman modul, dan footer membaca dari sini.
+- `src/lib/modules.ts`: tujuh modul (nama, fitur, peran AI, layar produk). Menu, halaman modul, dan footer membaca dari sini.
 - `src/lib/site.ts`: nama, kontak, navigasi, sektor industri, dan acuan regulasi.
 - `src/components/product/`: layar produk berlabel "Data contoh".
 - `docs/IMAGE-CREDITS.md`: sumber dan lisensi setiap foto.
+- `public/brand/` dan `docs/BRAND.md`: berkas logo dan panduan pemakaiannya.
 - `DESIGN.md` dan `PRODUCT.md`: sistem desain dan kebenaran produk.
 
 ## Deploy

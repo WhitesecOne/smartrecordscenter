@@ -1,18 +1,16 @@
 import { cn } from "@/lib/utils"
 
-// Provisional mark until the owner supplies a logo: stacked record sheets, the top one filed.
+// "Arsip Tersimpan": a system frame whose last corner is filled by one record block, the record filed and locked in.
+// This is the small-size cut (heavier frame, larger block), since the site only draws the mark at 20 to 40 px.
+// Masters for print and large sizes live in public/brand/.
+const FRAME =
+  "M220 130V80A44 44 0 0 0 176 36H80A44 44 0 0 0 36 80V176A44 44 0 0 0 80 220H130V190H80A14 14 0 0 1 66 176V80A14 14 0 0 1 80 66H176A14 14 0 0 1 190 80V130Z"
+
 export function LogoMark({ className, inverse }: { className?: string; inverse?: boolean }) {
-  const bg = inverse ? "#fff" : "var(--navy)"
-  const fg = inverse ? "var(--navy)" : "#fff"
-  // The filed sheet: brand blue on white, a lighter blue on navy so it still reads as blue.
-  const accent = inverse ? "var(--brand)" : "#9bb8ff"
   return (
-    <svg viewBox="0 0 32 32" aria-hidden className={cn("size-8 shrink-0", className)}>
-      <rect width="32" height="32" rx="7" fill={bg} />
-      <rect x="8" y="9" width="16" height="3" rx="1" fill={fg} opacity="0.45" />
-      <rect x="8" y="14.5" width="16" height="3" rx="1" fill={fg} opacity="0.7" />
-      <rect x="8" y="20" width="10" height="3" rx="1" fill={accent} />
-      <rect x="20" y="19" width="5" height="5" rx="1" fill={fg} />
+    <svg viewBox="0 0 256 256" aria-hidden className={cn("size-8 shrink-0", className)}>
+      <path d={FRAME} fill={inverse ? "#fff" : "var(--navy)"} />
+      <rect x="156" y="156" width="64" height="64" rx="14" fill={inverse ? "var(--brand-soft)" : "var(--brand)"} />
     </svg>
   )
 }

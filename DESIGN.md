@@ -323,3 +323,7 @@ Motion is quiet and entrance-only, respecting reduced-motion through a global us
 - **Don't** invent statistics, client logos, testimonials or certifications; standards are listed as design references, "bukan klaim sertifikasi".
 - **Don't** use images from Google search or photographs showing third-party logos or branded signage.
 - **Don't** use neutral black shadows or shadows on flat marketing cards at rest.
+
+## Logo
+
+The mark is "Arsip Tersimpan" (approved 2026-10-06): a navy system frame (`#0B2447`) whose bottom-right corner is filled by one blue record block (`#1D4ED8`; `#9BB8FF` with a white frame on navy). The site draws the small-size cut from `src/components/logo.tsx` beside the name set in Red Hat Display Bold; masters and the app-icon tile live in `public/brand/`, usage rules in `docs/BRAND.md`.
