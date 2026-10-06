@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Wireframe: Smart Records Center</title>
+<style>
+  :root { --bg:#eef0f3; --paper:#fff; --ink:#1b1f24; --ink2:#5b636b; --g1:#c9ced4; --g2:#e3e6ea; --g3:#f3f4f6; --line:#d3d8de; --note:#1f5eff; }
+  * { box-sizing: border-box; }
+  body { margin:0; font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; background:var(--bg); color:var(--ink); }
+  a { color: var(--note); }
+  :focus-visible { outline:2px solid var(--note); outline-offset:2px; }
+  .bar { position:sticky; top:0; z-index:5; background:var(--ink); color:#fff; }
+  .bar .in { max-width:1280px; margin:0 auto; padding:10px 16px; display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
+  .bar a { color:#c9d6ff; }
+  .tabs { display:flex; gap:4px; flex-wrap:wrap; }
+  .tabs button { min-height:40px; padding:0 12px; border:1px solid #ffffff33; background:transparent; color:#fff; border-radius:6px; font:inherit; cursor:pointer; }
+  .tabs button[aria-selected="true"] { background:#fff; color:var(--ink); }
+  .page { display:none; max-width:1280px; margin:0 auto; padding:24px 16px 60px; }
+  .page.on { display:block; }
+  .page > h1 { font-size:1.5rem; margin:0 0 4px; }
+  .page > p.sub { margin:0 0 20px; color:var(--ink2); max-width:80ch; }
+  .layout { display:grid; gap:20px; grid-template-columns: minmax(0,1fr); }
+  @media (min-width: 1000px) { .layout { grid-template-columns: minmax(0,1fr) 300px; } }
+  .frame { background:var(--paper); border:1px solid var(--line); border-radius:8px; overflow:hidden; }
+  .mobile .frame { max-width:380px; }
+  .blk { position:relative; padding:28px 24px 24px; border-bottom:1px dashed var(--g1); }
+  .blk:last-child { border-bottom:0; }
+  .blk.dark { background:#3a4047; }
+  .blk.dark .h, .blk.dark .t { background:#6d757e; }
+  .blk.soft { background:var(--g3); }
+  .lbl { position:absolute; top:6px; left:8px; font-size:12px; font-weight:700; color:var(--note); letter-spacing:.02em; }
+  .h { height:18px; background:#8d959d; border-radius:3px; margin:6px 0 10px; }
+  .h.xl { height:34px; } .h.l { height:26px; }
+  .t { height:9px; background:var(--g1); border-radius:3px; margin:7px 0; }
+  .w90{width:90%}.w80{width:80%}.w70{width:70%}.w60{width:60%}.w50{width:50%}.w40{width:40%}.w30{width:30%}.w20{width:20%}
+  .row { display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+  .btn { display:inline-block; height:36px; width:130px; border:2px solid #6d757e; border-radius:4px; }
+  .btn.fill { background:#6d757e; }
+  .img { background: linear-gradient(to top right, transparent calc(50% - 1px), var(--g1) 50%, transparent calc(50% + 1px)), linear-gradient(to top left, transparent calc(50% - 1px), var(--g1) 50%, transparent calc(50% + 1px)), var(--g2); border-radius:4px; min-height:120px; }
+  .ui { background:var(--g2); border:2px solid #9aa2aa; border-radius:6px; min-height:160px; display:flex; align-items:center; justify-content:center; color:#5b636b; font-size:12px; font-weight:600; text-align:center; padding:8px; }
+  .g { display:grid; gap:14px; }
+  .c2 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .c3 { grid-template-columns: repeat(3, minmax(0,1fr)); }
+  .c4 { grid-template-columns: repeat(4, minmax(0,1fr)); }
+  .c5 { grid-template-columns: repeat(5, minmax(0,1fr)); }
+  .s57 { grid-template-columns: 5fr 7fr; } .s75 { grid-template-columns: 7fr 5fr; } .s39 { grid-template-columns: 3fr 9fr; } .s48 { grid-template-columns: 4fr 8fr; }
+  .box { border:1px solid var(--g1); border-radius:4px; padding:10px; }
+  .chip { display:inline-block; font-size:12px; padding:2px 8px; border:1px solid var(--g1); border-radius:4px; color:var(--ink2); background:#fff; }
+  .field { height:34px; border:1px solid var(--g1); border-radius:4px; margin:4px 0 10px; }
+  .field.area { height:80px; }
+  .flabel { height:8px; width:30%; background:var(--g1); border-radius:3px; }
+  .ph { font-size:12px; color:#8a5a00; background:#fff4d6; border:1px dashed #d8a73a; padding:2px 6px; border-radius:3px; display:inline-block; }
+  .nav { display:flex; align-items:center; gap:14px; padding:12px 16px; border-bottom:1px solid var(--line); font-size:13px; flex-wrap:wrap; }
+  .nav .logo { width:120px; height:22px; background:#8d959d; border-radius:3px; }
+  .nav .sp { flex:1; }
+  .util { background:#3a4047; color:#dfe3e8; font-size:12px; padding:5px 16px; display:flex; gap:14px; justify-content:flex-end; }
+  .notes { display:flex; flex-direction:column; gap:10px; }
+  .n { background:var(--paper); border-left:3px solid var(--note); border-radius:4px; padding:10px 12px; font-size:13.5px; }
+  .n b { display:block; margin-bottom:2px; }
+  .flow { display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
+  .flow .box { flex:1; min-width:90px; text-align:center; font-size:12px; color:var(--ink2); }
+  .arrow { color:#8d959d; }
+  .mega { border:2px solid #6d757e; border-radius:6px; margin:0 16px 16px; padding:14px; background:#fff; }
+  table.wt { width:100%; border-collapse:collapse; font-size:12px; color:var(--ink2); }
+  table.wt td, table.wt th { border:1px solid var(--g1); padding:6px 8px; text-align:left; }
+  table.wt th { background:var(--g3); }
+  @media (max-width: 700px) {
+    .c3,.c4,.c5 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    .s57,.s75,.s39,.s48,.c2 { grid-template-columns: minmax(0,1fr); }
+    .blk { padding:26px 14px 18px; }
+  }
+</style>
+</head>
+<body>
+<div class="bar"><div class="in">
+  <a href="index.html">← Daftar mockup</a>
+  <div class="tabs" role="tablist" aria-label="Halaman">
+    <button role="tab" aria-selected="true" data-p="nav">Header &amp; mega menu</button>
+    <button role="tab" aria-selected="false" data-p="home">Beranda</button>
+    <button role="tab" aria-selected="false" data-p="homem">Beranda (HP)</button>
+    <button role="tab" aria-selected="false" data-p="platform">Platform</button>
+    <button role="tab" aria-selected="false" data-p="how">Cara Kerja</button>
+    <button role="tab" aria-selected="false" data-p="module">Modul</button>
+    <button role="tab" aria-selected="false" data-p="security">Keamanan</button>
+    <button role="tab" aria-selected="false" data-p="why">Mengapa Kami</button>
+    <button role="tab" aria-selected="false" data-p="about">Tentang Kami</button>
+    <button role="tab" aria-selected="false" data-p="contact">Kontak</button>
+  </div>
+</div></div>
+
+<!-- HEADER & MEGA MENU -->
+<section class="page on" id="nav" role="tabpanel">
+  <h1>Header &amp; mega menu</h1>
+  <p class="sub">Header lengket di atas. Tombol "Minta Demo" selalu terlihat. Dua mega menu: Platform dan Modul.</p>
+  <div class="layout">
+    <div class="frame">
+      <div class="util"><span>ID | EN</span><span>Masuk ke demo</span><span>Telepon <span class="ph">[DATA ASLI]</span></span></div>
+      <div class="nav"><span class="logo" title="Logo"></span><b>Platform ▾</b><span>Modul ▾</span><span>Solusi ▾</span><span>Mengapa Kami</span><span>Tentang Kami</span><span>Kontak</span><span class="sp"></span><span class="btn fill" style="width:110px;height:32px"></span></div>
+      <div class="mega">
+        <div class="g s75">
+          <div class="g c2">
+            <div class="box"><div class="h w60"></div><div class="t w90"></div><div class="t w70"></div><span class="chip">Ikhtisar Platform</span></div>
+            <div class="box"><div class="h w60"></div><div class="t w90"></div><div class="t w70"></div><span class="chip">Cara Kerja</span></div>
+            <div class="box"><div class="h w60"></div><div class="t w90"></div><div class="t w70"></div><span class="chip">Arsitektur &amp; Integrasi</span></div>
+            <div class="box"><div class="h w60"></div><div class="t w90"></div><div class="t w70"></div><span class="chip">Keamanan &amp; Kepatuhan</span></div>
+          </div>
+          <div class="box"><div class="img" style="min-height:90px"></div><div class="h w70"></div><div class="t w80"></div><span class="chip">Coba demo app</span></div>
+        </div>
+      </div>
+      <div class="nav"><span class="logo"></span><span>Platform ▾</span><b>Modul ▾</b><span>Solusi ▾</span><span>Mengapa Kami</span><span>Tentang Kami</span><span>Kontak</span><span class="sp"></span><span class="btn fill" style="width:110px;height:32px"></span></div>
+      <div class="mega">
+        <div class="g c5">
+          <div class="box"><div class="h"></div><div class="t"></div><div class="t w80"></div><div class="t w70"></div><div class="t w80"></div><span class="chip">Tata Kelola</span></div>
+          <div class="box"><div class="h"></div><div class="t"></div><div class="t w80"></div><div class="t w70"></div><div class="t w80"></div><span class="chip">AI &amp; Otomasi</span></div>
+          <div class="box"><div class="h"></div><div class="t"></div><div class="t w80"></div><div class="t w70"></div><span class="chip">Repositori</span></div>
+          <div class="box"><div class="h"></div><div class="t"></div><div class="t w80"></div><span class="chip">Preservasi</span></div>
+          <div class="box"><div class="h"></div><div class="t"></div><div class="t w80"></div><div class="t w60"></div><span class="chip">Audit &amp; Bukti</span></div>
+        </div>
+        <div class="row" style="margin-top:12px;justify-content:space-between"><div class="t w40"></div><span class="btn" style="height:30px"></span></div>
+      </div>
+    </div>
+    <div class="notes">
+      <div class="n"><b>Utility bar</b>Bahasa, masuk ke demo, telepon. Kecil, tidak bersaing dengan menu utama.</div>
+      <div class="n"><b>Mega menu Platform</b>4 halaman penjelasan platform, masing-masing dengan 1 kalimat. Panel kanan mengajak mencoba demo app.</div>
+      <div class="n"><b>Mega menu Modul</b>5 kolom sesuai bagan Anda. Setiap sub-fitur bisa diklik ke bagian terkait di halaman modulnya.</div>
+      <div class="n"><b>Mobile</b>Ikon menu membuka panel penuh dengan accordion Platform dan Modul. Tombol "Minta Demo" lengket di bawah layar.</div>
+      <div class="n"><b>Aksesibilitas</b>Bisa dibuka dengan hover, klik, dan keyboard; Escape menutup.</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOME -->
+<section class="page" id="home" role="tabpanel">
+  <h1>Beranda</h1>
+  <p class="sub">Tujuan: dalam 10 detik pengunjung paham apa produknya, untuk siapa, dan bisa langsung minta demo.</p>
+  <div class="layout">
+    <div class="frame">
+      <div class="nav"><span class="logo"></span><span>Platform ▾</span><span>Modul ▾</span><span>Solusi ▾</span><span>Mengapa Kami</span><span>Tentang Kami</span><span>Kontak</span><span class="sp"></span><span class="btn fill" style="width:110px;height:32px"></span></div>
+      <div class="blk"><span class="lbl">1 · HERO</span><div class="g s57" style="align-items:center"><div><div class="h xl w90"></div><div class="h xl w70"></div><div class="t w90"></div><div class="t w80"></div><div class="t w60"></div><div class="row" style="margin-top:14px"><span class="btn fill"></span><span class="btn"></span></div></div><div class="ui" style="min-height:230px">Mockup dashboard produk<br>(status arsip, tabel, usulan AI)</div></div></div>
+      <div class="blk soft"><span class="lbl">2 · BAR KEPERCAYAAN</span><div class="row" style="justify-content:space-between"><div class="t w20"></div><div class="t w20"></div><div class="t w20"></div><div class="t w20"></div></div><span class="ph">[DATA ASLI] logo klien, atau referensi regulasi</span></div>
+      <div class="blk"><span class="lbl">3 · TANTANGAN → SOLUSI</span><div class="g s39"><div><div class="h l"></div><div class="t w80"></div></div><div><div class="box"><div class="h w50"></div><div class="t w90"></div></div><div class="box" style="margin-top:8px"><div class="h w50"></div><div class="t w90"></div></div><div class="box" style="margin-top:8px"><div class="h w50"></div><div class="t w90"></div></div></div></div></div>
+      <div class="blk soft"><span class="lbl">4 · IKHTISAR PLATFORM (diagram)</span><div class="h l w40" style="margin:0 auto 14px"></div><div class="flow"><div class="box">Tata Kelola</div><span class="arrow">+</span><div class="box">AI &amp; Otomasi</div><span class="arrow">→</span><div class="box">Repositori<br>Aktif · Inaktif · Permanen</div><span class="arrow">→</span><div class="box">Preservasi</div><span class="arrow">→</span><div class="box">Audit &amp; Bukti</div></div></div>
+      <div class="blk"><span class="lbl">5 · MODUL (tab interaktif)</span><div class="g s39"><div><div class="box">Modul 1</div><div class="box" style="margin-top:6px">Modul 2</div><div class="box" style="margin-top:6px">Modul 3</div><div class="box" style="margin-top:6px">Modul 4</div><div class="box" style="margin-top:6px">Modul 5</div></div><div class="g c2"><div><div class="h w70"></div><div class="t"></div><div class="t w80"></div><div class="t w60"></div><div class="t w70"></div></div><div class="ui">Mini UI modul</div></div></div></div>
+      <div class="blk soft"><span class="lbl">6 · SIKLUS HIDUP ARSIP</span><div class="flow"><div class="box">Registrasi</div><span class="arrow">→</span><div class="box">Aktif</div><span class="arrow">→</span><div class="box">Inaktif</div><span class="arrow">→</span><div class="box">Permanen / Musnah</div></div></div>
+      <div class="blk"><span class="lbl">7 · AI YANG TERKENDALI</span><div class="g c2"><div class="ui">Dokumen contoh<br>(highlight sumber)</div><div class="ui">Field hasil ekstraksi + skor</div></div></div>
+      <div class="blk dark"><span class="lbl" style="color:#9fc0ff">8 · KEAMANAN &amp; KEPATUHAN</span><div class="g c2"><div><div class="h l w70"></div><div class="t w90"></div></div><div><div class="t"></div><div class="t w80"></div><div class="t w90"></div><div class="t w70"></div><div class="t w80"></div></div></div></div>
+      <div class="blk"><span class="lbl">9 · MENGAPA KAMI (teaser)</span><div class="g s57"><div class="img" style="min-height:180px"></div><div><div class="h l w60"></div><div class="t w90"></div><div class="t w80"></div><div class="t w90"></div><div class="t w70"></div></div></div></div>
+      <div class="blk soft"><span class="lbl">10 · SEKTOR (opsional)</span><div class="g c4"><div class="img"></div><div class="img"></div><div class="img"></div><div class="img"></div></div></div>
+      <div class="blk dark"><span class="lbl" style="color:#9fc0ff">11 · CTA PENUTUP</span><div class="row" style="justify-content:space-between"><div style="flex:1"><div class="h l w60"></div><div class="t w50"></div></div><span class="btn fill" style="background:#c9ced4;border-color:#c9ced4"></span></div></div>
+      <div class="blk"><span class="lbl">12 · FOOTER</span><div class="g c4"><div><div class="nav" style="border:0;padding:0"><span class="logo"></span></div><div class="t w80"></div><span class="ph">[DATA ASLI] alamat, email, telepon</span></div><div><div class="t"></div><div class="t w70"></div><div class="t w80"></div></div><div><div class="t"></div><div class="t w70"></div><div class="t w80"></div></div><div><div class="t"></div><div class="t w70"></div><div class="t w60"></div></div></div></div>
+    </div>
+    <div class="notes">
+      <div class="n"><b>Hero</b>Headline jelas + 2 CTA + visual produk. CTA terlihat tanpa scroll di 1366×768 dan 360×640.</div>
+      <div class="n"><b>Bukti tanpa karangan</b>Logo klien, angka, dan testimoni hanya jika data asli ada. Sementara: referensi regulasi.</div>
+      <div class="n"><b>Tantangan → solusi</b>Bahasa masalah pembeli: arsip tersebar, retensi manual, sulit membuktikan kepatuhan.</div>
+      <div class="n"><b>Diagram platform</b>Menerjemahkan bagan Anda menjadi visual yang rapi dan bisa diklik ke halaman modul.</div>
+      <div class="n"><b>Ritme</b>Section berganti komposisi (split, diagram, tab, band gelap) supaya tidak monoton.</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOME MOBILE -->
+<section class="page mobile" id="homem" role="tabpanel">
+  <h1>Beranda di HP (360 px)</h1>
+  <p class="sub">Urutan sama dengan desktop. Kolom ditumpuk, tab modul menjadi accordion, tombol "Minta Demo" lengket di bawah.</p>
+  <div class="layout">
+    <div class="frame">
+      <div class="nav"><span class="logo" style="width:100px"></span><span class="sp"></span><span>☰</span></div>
+      <div class="blk"><span class="lbl">HERO</span><div class="h l"></div><div class="h l w70"></div><div class="t"></div><div class="t w80"></div><div class="btn fill" style="width:100%;margin-top:10px"></div><div class="btn" style="width:100%;margin-top:8px"></div><div class="ui" style="margin-top:14px;min-height:140px">Mockup produk (diperkecil)</div></div>
+      <div class="blk soft"><span class="lbl">TANTANGAN</span><div class="box"><div class="h w60"></div><div class="t"></div></div><div class="box" style="margin-top:6px"><div class="h w60"></div><div class="t"></div></div></div>
+      <div class="blk"><span class="lbl">DIAGRAM (vertikal)</span><div class="box" style="text-align:center">Tata Kelola</div><div style="text-align:center">↓</div><div class="box" style="text-align:center">AI &amp; Otomasi</div><div style="text-align:center">↓</div><div class="box" style="text-align:center">Repositori</div></div>
+      <div class="blk soft"><span class="lbl">MODUL (accordion)</span><div class="box">Modul 1 ▾</div><div class="ui" style="min-height:100px;margin:6px 0">Isi modul terbuka</div><div class="box">Modul 2 ▸</div><div class="box" style="margin-top:6px">Modul 3 ▸</div></div>
+      <div class="blk"><span class="lbl">…section lain…</span><div class="t w60"></div></div>
+      <div class="blk dark" style="position:sticky;bottom:0"><span class="lbl" style="color:#9fc0ff">CTA LENGKET</span><div class="btn fill" style="width:100%;background:#c9ced4;border-color:#c9ced4"></div></div>
+    </div>
+    <div class="notes">
+      <div class="n"><b>Tanpa scroll horizontal</b>Mockup produk diskalakan, tabel lebar hanya bergulir di dalam bingkainya.</div>
+      <div class="n"><b>Tap target</b>Semua tombol dan link minimal 44 px.</div>
+      <div class="n"><b>CTA lengket</b>Hilang otomatis saat tombol CTA di halaman sedang terlihat, supaya tidak dobel.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PLATFORM -->
+<section class="page" id="platform" role="tabpanel">
+  <h1>Platform: Ikhtisar</h1>
+  <p class="sub">Menjelaskan platform sebagai satu sistem, lalu mengarahkan ke tiap modul.</p>
+  <div class="layout">
+    <div class="frame">
+      <div class="blk"><span class="lbl">HERO HALAMAN</span><div class="h xl w60"></div><div class="t w80"></div><div class="t w70"></div><div class="row" style="margin-top:12px"><span class="btn fill"></span><span class="btn"></span></div></div>
+      <div class="blk soft"><span class="lbl">DIAGRAM BESAR (bagan Anda, interaktif)</span><div class="box" style="width:40%;margin:0 auto;text-align:center">SMART RECORDS CENTER</div><div class="g c2" style="margin:14px 0"><div class="box" style="text-align:center">Tata Kelola Informasi<div class="t w70" style="margin:8px auto"></div></div><div class="box" style="text-align:center">AI &amp; Otomasi<div class="t w70" style="margin:8px auto"></div></div></div><div class="box" style="width:60%;margin:0 auto;text-align:center">Repositori: Aktif · Inaktif · Permanen</div><div class="box" style="width:40%;margin:10px auto;text-align:center">Preservasi Digital</div><div class="box" style="width:40%;margin:0 auto;text-align:center">Audit &amp; Bukti</div></div>
+      <div class="blk"><span class="lbl">ALUR SATU ARSIP</span><div class="flow"><div class="box">Tangkap</div><span class="arrow">→</span><div class="box">Klasifikasi</div><span class="arrow">→</span><div class="box">Terapkan aturan</div><span class="arrow">→</span><div class="box">Simpan</div><span class="arrow">→</span><div class="box">Lestarikan</div><span class="arrow">→</span><div class="box">Buktikan</div></div></div>
+      <div class="blk soft"><span class="lbl">RINGKASAN 5 MODUL (baris, link ke halaman modul)</span><div class="box"><div class="row"><div class="t w20"></div><div class="t w50"></div></div></div><div class="box" style="margin-top:6px"><div class="row"><div class="t w20"></div><div class="t w50"></div></div></div><div class="box" style="margin-top:6px"><div class="row"><div class="t w20"></div><div class="t w50"></div></div></div></div>
+      <div class="blk"><span class="lbl">ARSITEKTUR &amp; INTEGRASI</span><div class="g c2"><div class="ui">Diagram lapisan: web, API, database, storage WORM, indeks pencarian, worker AI</div><div><div class="h w60"></div><div class="t"></div><div class="t w80"></div><span class="ph">[DATA ASLI] integrasi yang benar-benar didukung</span></div></div></div>
+      <div class="blk dark"><span class="lbl" style="color:#9fc0ff">CTA</span><div class="h l w50"></div></div>
+    </div>
+    <div class="notes">
+      <div class="n"><b>Satu gambaran utuh</b>Pengunjung melihat bagaimana tata kelola dan AI bekerja bersama sebelum masuk ke detail modul.</div>
+      <div class="n"><b>Jujur soal status</b>Bagian arsitektur memberi label "dalam pengembangan" untuk komponen yang belum dibangun.</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="page" id="how" role="tabpanel">
+  <h1>Platform: Cara Kerja (siklus hidup arsip)</h1>
+  <p class="sub">Menunjukkan perjalanan satu arsip dari dibuat sampai permanen atau dimusnahkan, dengan aturan dan bukti di setiap tahap.</p>
+  <div class="layout">
+    <div class="frame">
+      <div class="blk"><span class="lbl">HERO</span><div class="h xl w60"></div><div class="t w70"></div></div>
+      <div class="blk soft"><span class="lbl">TIMELINE BESAR (lengket saat scroll)</span><div class="flow"><div class="box">Registrasi</div><span class="arrow">→</span><div class="box">Aktif</div><span class="arrow">→</span><div class="box">Inaktif</div><span class="arrow">→</span><div class="box">Permanen</div><span class="arrow">/</span><div class="box">Musnah</div></div></div>
+      <div class="blk"><span class="lbl">TIAP TAHAP: apa terjadi · siapa · aturan · bukti</span><div class="g s48"><div class="ui" style="min-height:120px">UI tahap</div><div><div class="h w50"></div><table class="wt"><tr><th>Apa terjadi</th><th>Siapa</th><th>Aturan</th><th>Bukti</th></tr><tr><td>…</td><td>…</td><td>…</td><td>…</td></tr></table></div></div></div>
+      <div class="blk soft"><span class="lbl">CONTOH NYATA: laporan keuangan tahunan</span><div class="ui" style="min-height:90px">2026 ─ aktif 2 th ─ 2028 ─ inaktif 8 th ─ 2036 ─ permanen</div></div>
+      <div class="blk"><span class="lbl">PENYUSUTAN: persetujuan berjenjang + berita acara</span><div class="flow"><div class="box">Usulan batch</div><span class="arrow">→</span><div class="box">Cek legal hold</div><span class="arrow">→</span><div class="box">Persetujuan</div><span class="arrow">→</span><div class="box">Eksekusi</div><span class="arrow">→</span><div class="box">Berita acara</div></div></div>
+      <div class="blk dark"><span class="lbl" style="color:#9fc0ff">CTA</span><div class="h l w50"></div></div>
+    </div>
+    <div class="notes"><div class="n"><b>Kenapa halaman ini penting</b>Pembeli arsip menilai "apakah retensi dan penyusutan benar-benar otomatis dan aman". Halaman ini menjawabnya langkah demi langkah.</div></div>
+  </div>
+</section>
+
+<!-- MODULE -->
+<section class="page" id="module" role="tabpanel">
+  <h1>Template halaman modul (dipakai 5 modul)</h1>
+  <p class="sub">Satu template, isi berbeda per modul: Tata Kelola Informasi, AI &amp; Otomasi, Repositori Arsip, Preservasi Digital, Audit &amp; Bukti.</p>
+  <div class="layout">
+    <div class="frame">
+      <div class="blk"><span class="lbl">BREADCRUMB + HERO MODUL</span><div class="t w30"></div><div class="g s57" style="margin-top:10px;align-items:center"><div><div class="h xl w90"></div><div class="t"></div><div class="t w80"></div><div class="row" style="margin-top:12px"><span class="btn fill"></span><span class="btn"></span></div></div><div class="ui" style="min-height:200px">Screenshot UI modul</div></div></div>
+      <div class="blk soft"><span class="lbl">NAVIGASI SUB-FITUR (lengket)</span><div class="row"><span class="chip">Kebijakan</span><span class="chip">BCS</span><span class="chip">Retensi</span><span class="chip">Akses</span><span class="chip">Penyusutan</span></div></div>
+      <div class="blk"><span class="lbl">SUB-FITUR 1 (teks kiri, UI kanan)</span><div class="g c2"><div><div class="h w60"></div><div class="t"></div><div class="t w80"></div><div class="t w70"></div></div><div class="ui">Mini UI</div></div></div>
+      <div class="blk"><span class="lbl">SUB-FITUR 2 (dibalik: UI kiri, teks kanan)</span><div class="g c2"><div class="ui">Mini UI</div><div><div class="h w60"></div><div class="t"></div><div class="t w80"></div></div></div></div>
+      <div class="blk soft"><span class="lbl">ATURAN YANG DITEGAKKAN &amp; BUKTI YANG DICATAT</span><table class="wt"><tr><th>Komponen</th><th>Fungsi</th><th>Aturan</th><th>Bukti</th></tr><tr><td>…</td><td>…</td><td>…</td><td>…</td></tr><tr><td>…</td><td>…</td><td>…</td><td>…</td></tr></table></div>
+      <div class="blk"><span class="lbl">TERHUBUNG DENGAN MODUL LAIN</span><div class="g c3"><div class="box"><div class="h w60"></div><div class="t"></div></div><div class="box"><div class="h w60"></div><div class="t"></div></div><div class="box"><div class="h w60"></div><div class="t"></div></div></div></div>
+      <div class="blk dark"><span class="lbl" style="color:#9fc0ff">CTA</span><div class="h l w50"></div></div>
+    </div>
+    <div class="notes">
+      <div class="n"><b>Sub-fitur bergantian</b>Teks dan UI bergantian kiri-kanan, bukan grid kartu seragam.</div>
+      <div class="n"><b>Tabel aturan</b>Bagian paling meyakinkan untuk compliance: aturan apa yang dijaga dan bukti apa yang tercatat.</div>
+      <div class="n"><b>Deep link</b>Item di mega menu langsung menuju sub-fitur terkait di halaman ini.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECURITY -->
+<section class="page" id="security" role="tabpanel">
+  <h1>Keamanan &amp; Kepatuhan</h1>
+  <p class="sub">Menjelaskan kontrol keamanan secara jujur: mana yang dirancang dan mana yang sudah tersedia.</p>
+  <div class="layout">
+    <div class="frame">
+      <div class="blk"><span class="lbl">HERO</span><div class="h xl w60"></div><div class="t w70"></div></div>
+      <div class="blk soft"><span class="lbl">KONTROL KEAMANAN</span><table class="wt"><tr><th>Kontrol</th><th>Cara kerja</th><th>Status</th></tr><tr><td>Register audit berantai hash</td><td>…</td><td>Tersedia di demo</td></tr><tr><td>Akses berbasis peran &amp; unit</td><td>…</td><td>Dirancang</td></tr><tr><td>Storage write-once</td><td>…</td><td>Dirancang</td></tr></table></div>
+      <div class="blk"><span class="lbl">REFERENSI REGULASI &amp; STANDAR</span><div class="g c4"><div class="box"><div class="t"></div></div><div class="box"><div class="t"></div></div><div class="box"><div class="t"></div></div><div class="box"><div class="t"></div></div></div><p style="font-size:12px;color:#5b636b">UU 43/2009 Kearsipan · UU 27/2022 PDP · ISO 15489 · OAIS: sebagai referensi rancangan, bukan klaim sertifikasi.</p></div>
+      <div class="blk soft"><span class="lbl">STATUS SERTIFIKASI &amp; HOSTING</span><span class="ph">[DATA ASLI]</span></div>
+      <div class="blk"><span class="lbl">PELAPORAN KERENTANAN</span><div class="t w60"></div><span class="ph">[DATA ASLI] email security</span></div>
+    </div>
+    <div class="notes"><div class="n"><b>Tanpa klaim palsu</b>Pembeli enterprise akan memeriksa klaim. Status yang jujur lebih meyakinkan daripada lencana sertifikasi yang belum dimiliki.</div></div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="page" id="why" role="tabpanel">
+  <h1>Mengapa Kami</h1>
+  <p class="sub">Alasan memilih Smart Records Center dibanding cara lama atau DMS umum.</p>
+  <div class="layout">
+    <div class="frame">
+      <div class="blk"><span class="lbl">HERO</span><div class="g s57" style="align-items:center"><div><div class="h xl"></div><div class="t w80"></div><span class="btn fill" style="margin-top:10px"></span></div><div class="img" style="min-height:180px"></div></div></div>
+      <div class="blk soft"><span class="lbl">ALASAN 1 · Satu platform untuk seluruh siklus</span><div class="g c2"><div><div class="h w70"></div><div class="t"></div><div class="t w80"></div></div><div class="ui">Visual pendukung</div></div></div>
+      <div class="blk"><span class="lbl">ALASAN 2 · Aturan kearsipan Indonesia sejak awal (BCS, JRA)</span><div class="g c2"><div class="ui">Visual pendukung</div><div><div class="h w70"></div><div class="t"></div><div class="t w80"></div></div></div></div>
+      <div class="blk soft"><span class="lbl">ALASAN 3 · AI dengan review manusia · ALASAN 4 · Bukti audit yang bisa diverifikasi</span><div class="g c2"><div class="box"><div class="h w60"></div><div class="t"></div><div class="t w80"></div></div><div class="box"><div class="h w60"></div><div class="t"></div><div class="t w80"></div></div></div></div>
+      <div class="blk"><span class="lbl">PERBANDINGAN PENDEKATAN</span><table class="wt"><tr><th>Kebutuhan</th><th>Folder bersama &amp; manual</th><th>DMS umum</th><th>Smart Records Center</th></tr><tr><td>Retensi otomatis sesuai JRA</td><td>…</td><td>…</td><td>…</td></tr><tr><td>Penyusutan dengan berita acara</td><td>…</td><td>…</td><td>…</td></tr><tr><td>Register audit yang bisa diverifikasi</td><td>…</td><td>…</td><td>…</td></tr></table></div>
+      <div class="blk soft"><span class="lbl">BUKTI</span><span class="ph">[DATA ASLI] studi kasus / testimoni. Section disembunyikan sampai datanya ada.</span></div>
+      <div class="blk dark"><span class="lbl" style="color:#9fc0ff">CTA</span><div class="h l w50"></div></div>
+    </div>
+    <div class="notes"><div class="n"><b>Perbandingan kategori, bukan merek</b>Membandingkan dengan "cara manual" dan "DMS umum" aman dan relevan, tanpa menyebut kompetitor.</div></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="page" id="about" role="tabpanel">
+  <h1>Tentang Kami</h1>
+  <p class="sub">Profil perusahaan. Hampir semua isi halaman ini butuh data asli dari Anda.</p>
+  <div class="layout">
+    <div class="frame">
+      <div class="blk"><span class="lbl">HERO: MISI</span><div class="g s57" style="align-items:center"><div><div class="h xl"></div><div class="t w80"></div></div><div class="img" style="min-height:180px"></div></div><span class="ph">[DATA ASLI] misi perusahaan</span></div>
+      <div class="blk soft"><span class="lbl">CERITA / LATAR BELAKANG</span><div class="t"></div><div class="t w90"></div><div class="t w80"></div><span class="ph">[DATA ASLI]</span></div>
+      <div class="blk"><span class="lbl">VISI &amp; NILAI</span><div class="g c3"><div class="box"><div class="h w60"></div><div class="t"></div></div><div class="box"><div class="h w60"></div><div class="t"></div></div><div class="box"><div class="h w60"></div><div class="t"></div></div></div></div>
+      <div class="blk soft"><span class="lbl">PIMPINAN / TIM</span><div class="g c4"><div class="img"></div><div class="img"></div><div class="img"></div><div class="img"></div></div><span class="ph">[DATA ASLI] foto &amp; nama asli, tidak memakai foto stok</span></div>
+      <div class="blk"><span class="lbl">LEGALITAS &amp; KANTOR</span><div class="g c2"><div><div class="t"></div><div class="t w70"></div><span class="ph">[DATA ASLI] badan hukum, NIB, alamat</span></div><div class="img">Peta (opsional)</div></div></div>
+      <div class="blk dark"><span class="lbl" style="color:#9fc0ff">CTA</span><div class="h l w50"></div></div>
+    </div>
+    <div class="notes"><div class="n"><b>Tim harus asli</b>Foto stok untuk "tim kami" langsung menurunkan kepercayaan. Lebih baik kosong dulu daripada palsu.</div></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="page" id="contact" role="tabpanel">
+  <h1>Kontak / Minta Demo</h1>
+  <p class="sub">Satu tujuan: permintaan demo terkirim. Form pendek, error jelas per field, lalu halaman terima kasih.</p>
+  <div class="layout">
+    <div class="frame">
+      <div class="blk"><span class="lbl">SPLIT: PENJELASAN + FORM</span><div class="g s57"><div><div class="h xl w90"></div><div class="t w80"></div><div class="box" style="margin-top:12px"><div class="h w60"></div><div class="t"></div><div class="t w80"></div><div class="t w70"></div></div><div class="box" style="margin-top:10px"><div class="t w50"></div><span class="ph">[DATA ASLI] alamat · email · telepon</span></div></div>
+        <div class="box"><div class="flabel"></div><div class="field"></div><div class="flabel"></div><div class="field"></div><div class="g c2"><div><div class="flabel"></div><div class="field"></div></div><div><div class="flabel"></div><div class="field"></div></div></div><div class="flabel"></div><div class="field"></div><div class="flabel"></div><div class="field area"></div><div class="t w70"></div><span class="btn fill" style="width:100%"></span></div></div></div>
+      <div class="blk soft"><span class="lbl">STATUS FORM</span><div class="g c3"><div class="box"><b style="font-size:12px">Error per field</b><div class="field" style="border-color:#c0392b"></div><div class="t w70" style="background:#e8b4ad"></div></div><div class="box"><b style="font-size:12px">Mengirim…</b><div class="btn fill" style="width:100%;opacity:.6"></div></div><div class="box"><b style="font-size:12px">Berhasil</b><div class="t w80"></div><div class="t w60"></div>→ halaman Terima Kasih</div></div></div>
+    </div>
+    <div class="notes">
+      <div class="n"><b>Field</b>Nama, organisasi, jabatan, email kantor, telepon (opsional), sektor, kebutuhan singkat, persetujuan kebijakan privasi.</div>
+      <div class="n"><b>Keamanan form</b>Validasi di server, perlindungan bot, isian tidak hilang saat ada error.</div>
+      <div class="n"><b>Terima kasih</b>Halaman tidak diindeks; konversi dicatat sekali (hanya jika cookie analitik disetujui).</div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const tabs = document.querySelectorAll('[role="tab"]');
+  function show(id) {
+    tabs.forEach(t => t.setAttribute('aria-selected', String(t.dataset.p === id)));
+    document.querySelectorAll('.page').forEach(p => p.classList.toggle('on', p.id === id));
+    history.replaceState(null, '', '#' + id);
+    window.scrollTo({ top: 0 });
+  }
+  tabs.forEach(t => t.addEventListener('click', () => show(t.dataset.p)));
+  const fromHash = () => { const id = location.hash.slice(1); if (id && document.getElementById(id)) show(id); };
+  window.addEventListener('hashchange', fromHash);
+  fromHash();
+</script>
+</body>
+</html>

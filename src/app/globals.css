@@ -1,0 +1,204 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-text);
+  --font-mono: var(--font-mono-face);
+  --font-heading: var(--font-display);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+
+  /* Brand: navy owns whole regions and every heading, blue is the single action colour. */
+  --color-navy: var(--navy);
+  --color-navy-2: var(--navy-2);
+  --color-brand: var(--brand);
+  --color-brand-ink: var(--brand-ink);
+  --color-brand-wash: var(--brand-wash);
+  --color-brand-soft: var(--brand-soft);
+  --color-mist: var(--mist);
+  --color-body: var(--body);
+  /* Record status colours, used only inside product UI. */
+  --color-teal: var(--teal);
+  --color-teal-ink: var(--teal-ink);
+  --color-teal-wash: var(--teal-wash);
+  --color-st-active: var(--teal);
+  --color-st-inactive: #64748b;
+  --color-st-permanent: var(--navy);
+  --color-st-pending: #9a5b00;
+  --color-st-pending-wash: #fff4e0;
+
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 10px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
+  --radius-3xl: 20px;
+  --radius-4xl: 24px;
+}
+
+/* Light only, by the owner's decision: the site is read at a desk, in office daylight. */
+:root {
+  --navy: #0b2447;
+  --navy-2: #133a6b;
+  --brand: #1d4ed8;
+  --brand-ink: #1e40af;
+  --brand-wash: #eaf0fd;
+  /* Links and icons that sit on navy fields. */
+  --brand-soft: #9bb8ff;
+  --teal: #0e7c7b;
+  --teal-ink: #0a6463;
+  --teal-wash: #e7f3f2;
+  --mist: #f4f6fa;
+  --body: #3b4a5e;
+
+  --background: #ffffff;
+  --foreground: var(--navy);
+  --card: #ffffff;
+  --card-foreground: var(--navy);
+  --popover: #ffffff;
+  --popover-foreground: var(--navy);
+  --primary: var(--brand);
+  --primary-foreground: #ffffff;
+  --secondary: #eef2f7;
+  --secondary-foreground: var(--navy);
+  --muted: var(--mist);
+  --muted-foreground: #526179;
+  --accent: var(--brand-wash);
+  --accent-foreground: var(--navy);
+  --destructive: #b42318;
+  --border: #e2e8f0;
+  --input: #cbd5e1;
+  --ring: var(--brand);
+  --radius: 0.625rem;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply font-sans;
+    scroll-padding-top: 6.5rem;
+    scrollbar-color: #b8c3d3 transparent;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-background text-body antialiased;
+    caret-color: var(--brand);
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    color: var(--navy);
+    font-family: var(--font-display);
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  ::selection {
+    background: var(--brand);
+    color: #fff;
+  }
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+  a {
+    text-underline-offset: 0.2em;
+  }
+  :focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 2px;
+  }
+  table {
+    font-variant-numeric: tabular-nums;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+  .display {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.028em;
+    line-height: 1.06;
+  }
+  .h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.022em;
+    line-height: 1.14;
+    font-size: clamp(1.875rem, 3vw, 2.5rem);
+  }
+  .h3 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    line-height: 1.25;
+    font-size: 1.375rem;
+  }
+  .lead {
+    font-size: 1.125rem;
+    line-height: 1.7;
+  }
+  .code {
+    font-family: var(--font-mono-face);
+    letter-spacing: -0.01em;
+  }
+  /* Text link in the action colour; the arrow only appears on links that move the reader to another page. */
+  .link-action {
+    @apply inline-flex items-center gap-1.5 font-semibold text-brand hover:text-brand-ink hover:underline;
+  }
+  /* Soft layered elevation, reserved for product frames, floating panels and menus. */
+  .shadow-product {
+    box-shadow:
+      0 1px 2px rgb(11 36 71 / 0.06),
+      0 12px 24px -8px rgb(11 36 71 / 0.12),
+      0 32px 64px -24px rgb(11 36 71 / 0.22);
+  }
+  /* Navy veil over photographs: dense where text sits, thinning toward the open side. */
+  .veil-left {
+    background:
+      linear-gradient(90deg, rgb(11 36 71 / 0.95) 0%, rgb(11 36 71 / 0.88) 38%, rgb(11 36 71 / 0.45) 68%, rgb(11 36 71 / 0.2) 100%),
+      linear-gradient(0deg, rgb(11 36 71 / 0.55) 0%, rgb(11 36 71 / 0) 40%);
+  }
+  /* On a phone the text sits low, so the photograph stays readable at the top and the navy gathers behind the words. */
+  @media (max-width: 767px) {
+    .veil-left {
+      background: linear-gradient(180deg, rgb(11 36 71 / 0.25) 0%, rgb(11 36 71 / 0.55) 18%, rgb(11 36 71 / 0.9) 42%, rgb(11 36 71 / 0.96) 100%);
+    }
+  }
+}
