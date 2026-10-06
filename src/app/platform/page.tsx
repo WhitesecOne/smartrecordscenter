@@ -43,7 +43,7 @@ export default function PlatformPage() {
         crumbs={[{ href: "/platform", label: "Platform" }, { label: "Ikhtisar" }]}
         title="Satu platform untuk seluruh tata kelola arsip digital"
         lead="Tujuh modul bekerja di atas satu sumber data: arsip, metadata, aturan retensi, hak akses, dan log audit yang sama. Tidak ada lagi arsip yang dikelola di luar aturan."
-        photo={{ src: "/images/team-meeting.webp", alt: "Tim kantor berdiskusi di sekitar meja rapat" }}
+        photo={{ src: "/images/data-center.webp", alt: "Lorong ruang server di pusat data" }}
       />
 
       <Section>
@@ -120,7 +120,7 @@ export default function PlatformPage() {
         </ul>
       </Section>
 
-      <CtaBand photo={{ src: "/images/office-discussion.webp", alt: "Dua rekan kerja berdiskusi di kantor" }} />
+      <CtaBand photo={{ src: "/images/laptop-dark.webp", alt: "Laptop menampilkan dasbor bertema gelap" }} />
     </>
   )
 }

@@ -1,11 +1,11 @@
-import { ChevronDownIcon, TriangleAlertIcon } from "lucide-react"
+import { ChevronDownIcon } from "lucide-react"
 
 import { PageHero } from "@/components/section"
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import { site } from "@/lib/site"
 
 export type LegalSection = { id: string; title: string; body: React.ReactNode }
 
-/** Numbered legal document: draft notice, table of contents (side column on desktop, collapsible on mobile), 70ch reading column. */
+/** Numbered legal document: effective date, table of contents (side column on desktop, collapsible on mobile), 70ch reading column. */
 export function LegalPage({ crumb, title, lead, sections }: { crumb: string; title: string; lead: string; sections: LegalSection[] }) {
   const toc = (
     <ol className="flex flex-col border-l border-border text-[0.9375rem]">
@@ -31,20 +31,14 @@ export function LegalPage({ crumb, title, lead, sections }: { crumb: string; tit
         </nav>
 
         <article className="min-w-0 max-w-[70ch]">
-          <Alert role="note" className="border-st-pending/30 bg-st-pending-wash px-4 py-3 text-st-pending">
-            <TriangleAlertIcon aria-hidden />
-            <AlertTitle className="font-semibold">Draf. Perlu ditinjau penasihat hukum sebelum dipublikasikan.</AlertTitle>
-            <AlertDescription className="text-body">Dokumen ini adalah titik awal penyusunan dan belum berlaku sebagai dokumen hukum.</AlertDescription>
-          </Alert>
-
-          <dl className="mt-6 flex flex-wrap gap-x-8 gap-y-2 text-sm">
+          <dl className="flex flex-wrap gap-x-8 gap-y-2 text-sm">
             <div className="flex gap-2">
               <dt className="text-muted-foreground">Tanggal berlaku:</dt>
-              <dd className="font-medium text-navy">[DATA ASLI: tanggal berlaku]</dd>
+              <dd className="font-medium text-navy">6 Oktober 2026</dd>
             </div>
             <div className="flex gap-2">
-              <dt className="text-muted-foreground">Status:</dt>
-              <dd className="font-medium text-navy">Draf</dd>
+              <dt className="text-muted-foreground">Penyelenggara:</dt>
+              <dd className="font-medium text-navy">{site.entity}</dd>
             </div>
           </dl>
 

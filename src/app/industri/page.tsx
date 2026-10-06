@@ -194,7 +194,7 @@ export default function IndustriPage() {
       })}
 
       <CtaBand
-        photo={{ src: "/images/office-discussion.webp", alt: "Dua rekan kerja berdiskusi di kantor" }}
+        photo={{ src: "/images/glass-dusk.webp", alt: "Fasad gedung kaca saat senja" }}
         title="Bahas kebutuhan kearsipan sektor Anda"
         lead="Kami tunjukkan bagaimana satu seri arsip dari sektor Anda diklasifikasikan, diberi retensi dan hak akses, lalu dicatat jejak auditnya. Anda tidak perlu mengirim dokumen rahasia."
       />

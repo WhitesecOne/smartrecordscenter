@@ -318,7 +318,7 @@ export default function MengapaKamiPage() {
       </Section>
 
       <CtaBand
-        photo={{ src: "/images/team-meeting.webp", alt: "Tim kantor berdiskusi di sekitar meja rapat" }}
+        photo={{ src: "/images/glass-atrium.webp", alt: "Atrium gedung kantor berdinding kaca" }}
         title="Lihat sendiri perbedaannya dalam demo"
         lead="Kami jalankan satu seri arsip contoh dari klasifikasi sampai berita acara, lengkap dengan jejak audit yang dapat Anda verifikasi sendiri. Anda tidak perlu mengirim dokumen rahasia."
       />

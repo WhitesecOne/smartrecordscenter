@@ -147,8 +147,8 @@ export default function SecurityPage() {
           <div className="rounded-xl border border-border bg-white p-6">
             <h2 className="text-xl font-bold">Sertifikasi dan hosting</h2>
             <p className="mt-3 text-[0.9375rem] leading-relaxed">
-              Status sertifikasi: <span className="font-semibold text-navy">[DATA ASLI]</span>. Lokasi pusat data dan model hosting: <span className="font-semibold text-navy">[DATA ASLI]</span>. Kami
-              tidak mencantumkan sertifikasi yang belum dimiliki.
+              Kami tidak mencantumkan sertifikasi yang belum dimiliki. Model penerapan (cloud, on-premise, atau hibrida) dan lokasi pusat data ditetapkan bersama organisasi
+              Anda sejak awal proyek.
             </p>
           </div>
           <div className="rounded-xl border border-border bg-white p-6">
@@ -161,7 +161,7 @@ export default function SecurityPage() {
         </div>
       </Section>
 
-      <CtaBand photo={{ src: "/images/monitoring-room.webp", alt: "Petugas memantau dinding layar di ruang kendali" }} title="Tinjau model keamanan bersama tim kami" lead="Kami siapkan sesi khusus untuk tim keamanan informasi dan kepatuhan Anda, termasuk pembahasan dokumen arsitektur dan model ancaman." />
+      <CtaBand photo={{ src: "/images/server-racks.webp", alt: "Rak server berisi perangkat penyimpanan" }} title="Tinjau model keamanan bersama tim kami" lead="Kami siapkan sesi khusus untuk tim keamanan informasi dan kepatuhan Anda, termasuk pembahasan dokumen arsitektur dan model ancaman." />
     </>
   )
 }

@@ -1,10 +1,12 @@
-import { ArrowRightIcon, CheckIcon, SearchIcon, ShieldCheckIcon } from "lucide-react"
+import { ArrowRightIcon, CheckIcon, ShieldCheckIcon } from "lucide-react"
 import * as motion from "motion/react-client"
 import type { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
 
 import { LifecycleTimeline } from "@/components/lifecycle"
+import { DashboardMock } from "@/components/product/dashboard"
+import { JsonLd } from "@/components/json-ld"
 import { ExtractionMock } from "@/components/product/extraction"
 import { ProductMock } from "@/components/product/mocks"
 import { RegisterVerifier } from "@/components/product/register"
@@ -13,7 +15,9 @@ import { Reveal } from "@/components/reveal"
 import { CtaBand, Section, SectionHeading } from "@/components/section"
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { faq } from "@/lib/faq"
 import { modules } from "@/lib/modules"
+import { homeGraph } from "@/lib/seo"
 import { ogBase, references, sectors, site } from "@/lib/site"
 
 const title = "Smart Records Center: Platform Tata Kelola Arsip Digital"
@@ -71,51 +75,37 @@ const reasons = [
 export default function Home() {
   return (
     <>
-      {/* Hero: the promise on navy beside a person doing the work, with the product's own answer floating over the photo. */}
+      <JsonLd data={homeGraph()} />
+
+      {/* Hero: the promise on navy beside the product itself, the screen an archivist opens every morning. */}
       <section className="relative isolate overflow-hidden bg-navy text-white">
-        <div className="grid lg:min-h-[min(86svh,46rem)] lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
-          <div className="order-2 flex flex-col justify-center px-4 pt-10 pb-14 sm:px-6 md:pt-14 md:pb-32 lg:order-1 lg:py-20 lg:pr-14 lg:pb-36 lg:pl-[max(2rem,calc((100vw-80rem)/2+2rem))]">
-            <motion.div className="max-w-[40rem]" initial={{ y: 24 }} animate={{ y: 0 }} transition={{ duration: 0.9, ease }}>
-              <h1 className="display text-[clamp(2.5rem,4.6vw,4rem)] text-white">Tata kelola arsip digital yang tertib, patuh, dan siap diaudit.</h1>
-              <p className="lead mt-6 max-w-[56ch] text-white/85">
-                Smart Records Center menyimpan, mencari, mengklasifikasikan, meretensi, dan menyusutkan arsip digital organisasi Anda dalam satu platform. Setiap tindakan
-                tercatat di jejak audit yang tidak dapat diubah, dan setiap usulan AI ditinjau arsiparis sebelum berlaku.
-              </p>
-              <div className="mt-9 flex flex-col gap-3 sm:flex-row" data-primary-cta>
-                <Button size="lg" render={<Link href="/kontak" />} nativeButton={false}>
-                  Minta Demo
-                </Button>
-                <Button size="lg" variant="outline-inverse" render={<Link href="#modul" />} nativeButton={false}>
-                  Lihat Tujuh Modul
-                </Button>
-              </div>
-              <p className="mt-10 max-w-[60ch] border-t border-white/20 pt-5 text-[13px] leading-relaxed text-white/70">
-                Dirancang mengacu pada{" "}
-                {references.map((r, i) => (
-                  <span key={r.code}>
-                    <span className="font-semibold text-white/90">{r.code}</span>
-                    {i < references.length - 1 ? ", " : ". "}
-                  </span>
-                ))}
-                Referensi rancangan, bukan klaim sertifikasi.
-              </p>
-            </motion.div>
-          </div>
-          <div className="relative order-1 h-56 sm:h-[26rem] lg:order-2 lg:h-auto">
-            <motion.div className="absolute inset-0" initial={{ scale: 1.06 }} animate={{ scale: 1 }} transition={{ duration: 1.8, ease }}>
-              <Image
-                src="/images/analyst-computer.webp"
-                alt="Pegawai mengelola arsip digital di komputer kantor"
-                fill
-                preload
-                sizes="(min-width: 1024px) 50vw, 100vw"
-                className="object-cover object-[60%_40%]"
-              />
-            </motion.div>
-            {/* Blends the photo's left edge into the navy panel so the two halves read as one field. */}
-            <div aria-hidden className="absolute inset-0 bg-[linear-gradient(0deg,var(--navy)_0%,rgb(11_36_71/0.35)_30%,transparent_60%)] lg:bg-[linear-gradient(90deg,var(--navy)_0%,rgb(11_36_71/0.55)_14%,rgb(11_36_71/0.12)_40%,transparent_62%)]" />
-            <HeroAnswer />
-          </div>
+        <div className="container-page grid items-center gap-12 pt-14 pb-16 md:pb-36 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-14 lg:pt-20 lg:pb-40">
+          <motion.div initial={{ y: 24 }} animate={{ y: 0 }} transition={{ duration: 0.9, ease }}>
+            <h1 className="display text-[clamp(2.5rem,4.6vw,3.75rem)] text-white">Tata kelola arsip digital yang tertib, patuh, dan siap diaudit.</h1>
+            <p className="lead mt-6 max-w-[54ch] text-white/85">
+              Smart Records Center menyimpan, mencari, mengklasifikasikan, meretensi, dan menyusutkan arsip digital organisasi Anda dalam satu platform. Setiap tindakan
+              tercatat di jejak audit yang tidak dapat diubah, dan setiap usulan AI ditinjau arsiparis sebelum berlaku.
+            </p>
+            <div className="mt-9 flex flex-col gap-3 sm:flex-row" data-primary-cta>
+              <Button size="lg" render={<Link href="/kontak" />} nativeButton={false}>
+                Minta Demo
+              </Button>
+              <Button size="lg" variant="outline-inverse" render={<Link href="#modul" />} nativeButton={false}>
+                Lihat Tujuh Modul
+              </Button>
+            </div>
+            <p className="mt-10 max-w-[56ch] border-t border-white/20 pt-5 text-[13px] leading-relaxed text-white/70">
+              Dirancang mengacu pada{" "}
+              {references.map((r, i) => (
+                <span key={r.code}>
+                  <span className="font-semibold text-white/90">{r.code}</span>
+                  {i < references.length - 1 ? ", " : ". "}
+                </span>
+              ))}
+              Referensi rancangan, bukan klaim sertifikasi.
+            </p>
+          </motion.div>
+          <HeroDashboard />
         </div>
       </section>
 
@@ -315,9 +305,6 @@ export default function Home() {
                 ))}
               </ul>
               <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                <p className="rounded-lg border border-white/15 px-4 py-3 text-sm text-white/85">
-                  <span className="font-semibold text-white">Status sertifikasi:</span> [DATA ASLI]
-                </p>
                 <Link href="/platform/keamanan" className="inline-flex items-center gap-1.5 font-semibold text-white hover:underline">
                   Keamanan &amp; kepatuhan <ArrowRightIcon className="size-4" aria-hidden />
                 </Link>
@@ -390,43 +377,67 @@ export default function Home() {
         </div>
       </Section>
 
-      <CtaBand photo={{ src: "/images/laptop-collaboration.webp", alt: "Rekan kerja meninjau dasbor di layar laptop bersama" }} />
+      {/* Questions buyers and auditors ask, answered in full on the page so search engines and AI assistants can quote them. */}
+      <Section id="tanya-jawab">
+        <div className="grid gap-12 lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)] lg:gap-16">
+          <div className="lg:sticky lg:top-36 lg:self-start">
+            <SectionHeading title="Pertanyaan yang sering diajukan" lead="Jawaban singkat untuk pertanyaan yang biasanya muncul dari arsiparis, auditor, dan tim TI sebelum demo." />
+            <Link href="/kontak" className="link-action mt-8">
+              Tanyakan hal lain kepada tim kami <ArrowRightIcon className="size-4" aria-hidden />
+            </Link>
+          </div>
+          <dl className="divide-y divide-border border-y border-border">
+            {faq.map((f) => (
+              <div key={f.q} className="py-6">
+                <dt className="font-heading text-lg leading-snug font-bold text-navy">{f.q}</dt>
+                <dd className="mt-2.5 max-w-[68ch] text-[0.9375rem] leading-relaxed text-body">{f.a}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </Section>
+
+      <CtaBand />
     </>
   )
 }
 
-/** What the person in the photo is looking at: one search answer and the audit chain status, labelled as sample data. */
-function HeroAnswer() {
+/** The overview screen with two answers lifted out of it: an AI proposal waiting for review and the audit chain status. */
+function HeroDashboard() {
   return (
-    <motion.figure
-      className="absolute bottom-8 left-6 hidden w-[23rem] rounded-xl border border-border bg-white p-4 text-body shadow-product sm:block lg:bottom-32 lg:-left-12"
-      initial={{ y: 20 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.8, ease, delay: 0.35 }}
-    >
-      <figcaption className="flex items-center justify-between gap-3 text-xs font-semibold text-muted-foreground">
-        Pencarian &amp; Temu Kembali
-        <SampleTag />
-      </figcaption>
-      <p className="mt-2.5 flex h-9 items-center gap-2 rounded-md border border-brand px-2.5 text-[13px] text-navy ring-3 ring-brand/15">
-        <SearchIcon className="size-3.5 shrink-0 text-brand" aria-hidden />
-        <span className="truncate">kontrak sewa gedung yang habis tahun ini</span>
-      </p>
-      <ul className="mt-3 flex flex-col gap-2.5 text-[13px]">
-        {[
-          ["Sewa Kantor Cabang Medan", 0.94],
-          ["Sewa Gudang Arsip Cikarang", 0.91],
-        ].map(([t, v]) => (
-          <li key={t} className="flex items-center justify-between gap-3">
-            <span className="truncate font-medium text-navy">{t}</span>
-            <Confidence value={v as number} />
-          </li>
-        ))}
-      </ul>
-      <p className="mt-3.5 flex items-center gap-2 border-t border-border pt-3 text-[12.5px] font-semibold text-teal-ink">
+    <div className="relative min-w-0 lg:pl-4">
+      {/* A lighter navy plate behind the screen: it separates the white frame from the navy field without a glow. */}
+      <div aria-hidden className="absolute -inset-x-3 top-6 -bottom-6 rounded-2xl border border-white/10 bg-navy-2/70 lg:-right-10 lg:left-10" />
+      <motion.div className="relative" initial={{ y: 28 }} animate={{ y: 0 }} transition={{ duration: 0.9, ease, delay: 0.1 }}>
+        <DashboardMock title="Smart Records Center · Ringkasan" />
+      </motion.div>
+      <motion.figure
+        className="absolute -bottom-10 -left-6 hidden w-[17rem] rounded-xl border border-border bg-white p-4 text-body shadow-product sm:block"
+        initial={{ y: 20 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.8, ease, delay: 0.35 }}
+      >
+        <figcaption className="flex items-center justify-between gap-2 text-xs font-semibold text-muted-foreground">
+          Usulan klasifikasi AI
+          <SampleTag />
+        </figcaption>
+        <p className="mt-2 text-sm font-semibold text-navy">Laporan Keuangan Tahunan 2025</p>
+        <p className="mt-2 flex items-center justify-between text-[13px]">
+          <span className="code text-navy">KU.01.02</span>
+          <Confidence value={0.97} />
+        </p>
+        <p className="mt-3 text-[12px] leading-snug text-muted-foreground">Menunggu konfirmasi arsiparis. Retensi aktif 2 th, inaktif 8 th, permanen.</p>
+      </motion.figure>
+      <motion.p
+        className="absolute right-4 -bottom-7 hidden items-center gap-2 rounded-lg border border-border bg-white px-3.5 py-2.5 text-[13px] font-semibold text-teal-ink shadow-product sm:flex"
+        initial={{ y: 12 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.8, ease, delay: 0.5 }}
+      >
         <ShieldCheckIcon className="size-4 shrink-0" aria-hidden />
-        Rantai jejak audit utuh · <span className="code font-normal">48.385 entri</span>
-      </p>
-    </motion.figure>
+        Rantai jejak audit utuh
+        <span className="code font-normal text-muted-foreground">48.385 entri</span>
+      </motion.p>
+    </div>
   )
 }

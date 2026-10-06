@@ -2,8 +2,10 @@ import { ChevronRightIcon } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 
+import { JsonLd } from "@/components/json-ld"
 import { Button } from "@/components/ui/button"
 import type { Photo } from "@/lib/modules"
+import { breadcrumbGraph } from "@/lib/seo"
 import { cn } from "@/lib/utils"
 
 export function Section({
@@ -101,6 +103,7 @@ export function PageHero({
   lead,
   photo,
   visual,
+  tone = "mist",
   actions = true,
   className,
   children,
@@ -110,6 +113,8 @@ export function PageHero({
   lead: React.ReactNode
   photo?: Photo
   visual?: React.ReactNode
+  /** Without a photo: "mist" for reading pages, "navy" for pages whose visual is a product screen. */
+  tone?: "mist" | "navy"
   actions?: boolean | React.ReactNode
   className?: string
   children?: React.ReactNode
@@ -117,6 +122,7 @@ export function PageHero({
   if (photo) {
     return (
       <section className={cn("relative isolate overflow-hidden bg-navy text-white", className)}>
+        <JsonLd data={breadcrumbGraph(crumbs)} />
         <Image src={photo.src} alt={photo.alt} fill preload sizes="100vw" className="-z-20 object-cover" />
         <div aria-hidden className="veil-left absolute inset-0 -z-10" />
         <div className="container-page flex min-h-[26rem] flex-col justify-end pt-36 pb-12 md:pt-14 md:pb-14 lg:min-h-[30rem] lg:pb-20">
@@ -131,14 +137,16 @@ export function PageHero({
       </section>
     )
   }
+  const navy = tone === "navy"
   return (
-    <section className={cn("relative overflow-hidden border-b border-border bg-mist", className)}>
+    <section className={cn("relative overflow-hidden", navy ? "bg-navy text-white" : "border-b border-border bg-mist", className)}>
+      <JsonLd data={breadcrumbGraph(crumbs)} />
       <div className={cn("container-page grid grid-cols-[minmax(0,1fr)] gap-12 py-14 lg:py-20", visual && "lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:items-center")}>
         <div>
-          <Breadcrumb items={crumbs} />
-          <h1 className="display mt-6 text-[clamp(2.25rem,4.4vw,3.5rem)]">{title}</h1>
-          <p className="lead mt-6 max-w-[60ch] text-body">{lead}</p>
-          {actions === true ? <HeroActions /> : actions}
+          <Breadcrumb items={crumbs} inverse={navy} />
+          <h1 className={cn("display mt-6 text-[clamp(2.25rem,4.4vw,3.5rem)]", navy && "text-white")}>{title}</h1>
+          <p className={cn("lead mt-6 max-w-[60ch]", navy ? "text-white/85" : "text-body")}>{lead}</p>
+          {actions === true ? <HeroActions inverse={navy} /> : actions}
         </div>
         {visual && <div className="min-w-0">{visual}</div>}
       </div>
@@ -146,7 +154,7 @@ export function PageHero({
   )
 }
 
-const ctaDefaultPhoto: Photo = { src: "/images/office-discussion.webp", alt: "Dua rekan kerja berdiskusi di kantor" }
+const ctaDefaultPhoto: Photo = { src: "/images/laptop-dashboard.webp", alt: "Laptop menampilkan dasbor data" }
 
 export function CtaBand({
   title = "Lihat bagaimana arsip organisasi Anda dikelola di Smart Records Center",

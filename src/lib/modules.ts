@@ -62,7 +62,6 @@ export type Module = {
   title: string
   lead: string
   metaDescription: string
-  photo: Photo
   heroMock: MockKey
   features: Feature[]
   rules: Rule[]
@@ -80,7 +79,6 @@ export const modules: Module[] = [
     lead: "Setiap organisasi menyimpan arsipnya dalam ruang data sendiri. Arsip tersusun dari khazanah, seri, berkas, hingga item, dengan status aktif, inaktif, atau permanen yang mengikuti jadwal retensinya.",
     metaDescription:
       "Repositori arsip terstruktur dengan pemisahan data antarorganisasi (multi-tenant), status aktif, inaktif, dan permanen, cek keutuhan berkas, serta deteksi duplikat berbantuan AI.",
-    photo: { src: "/images/server-racks.webp", alt: "Rak server berisi perangkat penyimpanan dan jaringan" },
     heroMock: "records",
     features: [
       {
@@ -159,7 +157,6 @@ export const modules: Module[] = [
     lead: "Cari dengan kata di dalam dokumen, dengan field metadata, atau dengan kalimat biasa. Hasil selalu disaring oleh hak akses pengguna sebelum ditampilkan, dan pencarian atas arsip rahasia tercatat.",
     metaDescription:
       "Pencarian teks lengkap dan berbasis metadata atas arsip digital, OCR untuk pindaian, pencarian makna berbantuan AI, dan hasil yang disaring hak akses.",
-    photo: { src: "/images/hero-professional.webp", alt: "Profesional berjas mencari dokumen di komputer kantor" },
     heroMock: "search",
     features: [
       {
@@ -226,7 +223,6 @@ export const modules: Module[] = [
     lead: "Skema metadata mengikuti elemen Dublin Core yang diperluas untuk kebutuhan kearsipan dan prinsip ISO 23081. Field wajib divalidasi, perubahan tercatat, dan AI membantu mengisi nilai dari isi dokumen.",
     metaDescription:
       "Manajemen metadata arsip dengan skema Dublin Core yang diperluas dan ISO 23081, validasi field wajib, riwayat perubahan, dan ekstraksi metadata berbantuan AI.",
-    photo: { src: "/images/data-entry-monitors.webp", alt: "Pegawai mengolah data di depan beberapa monitor" },
     heroMock: "metadata",
     features: [
       {
@@ -293,7 +289,6 @@ export const modules: Module[] = [
     lead: "Setiap organisasi menyusun taksonomi klasifikasinya sendiri: fungsi, kegiatan, dan transaksi. Kode klasifikasi menjadi alamat tetap arsip dan membawa aturan retensi serta tingkat keamanannya.",
     metaDescription:
       "Taksonomi klasifikasi arsip yang dapat dikonfigurasi per organisasi, versi skema yang tercatat, dan usulan klasifikasi berbantuan AI dengan konfirmasi arsiparis.",
-    photo: { src: "/images/data-workstation.webp", alt: "Pegawai menata data di laptop dan monitor di ruang kerja" },
     heroMock: "bcs",
     features: [
       {
@@ -348,7 +343,6 @@ export const modules: Module[] = [
     lead: "Jadwal retensi arsip (JRA) ditulis sebagai aturan yang dijalankan sistem. Tanggal pindah ke inaktif dan jatuh tempo dihitung otomatis, lalu arsip yang jatuh tempo disusun menjadi usulan pemindahan, pemusnahan, atau penyerahan.",
     metaDescription:
       "Mesin aturan jadwal retensi arsip (JRA), alur kerja penyusutan dengan persetujuan berjenjang, berita acara digital, legal hold, dan deteksi risiko berbantuan AI.",
-    photo: { src: "/images/tablet-approval.webp", alt: "Tangan menyetujui daftar periksa di tablet dengan stylus" },
     heroMock: "retention",
     features: [
       {
@@ -427,8 +421,7 @@ export const modules: Module[] = [
     lead: "Log audit bersifat append-only dan dirantai dengan hash. Siapa melakukan apa, pada arsip mana, kapan, dan berdasarkan aturan apa tercatat permanen. Auditor dapat memastikan tidak ada entri yang diubah atau dihapus.",
     metaDescription:
       "Jejak audit append-only yang tidak dapat diubah atas seluruh aksi terhadap arsip, verifikasi rantai hash, paket bukti untuk pemeriksaan, dan deteksi akses tidak wajar berbantuan AI.",
-    photo: { src: "/images/monitoring-room.webp", alt: "Petugas memantau dinding layar di ruang kendali" },
-    heroMock: "register",
+    heroMock: "evidence",
     features: [
       {
         id: "log-immutable",
@@ -483,7 +476,6 @@ export const modules: Module[] = [
     lead: "Status kepatuhan kearsipan terlihat setiap saat: arsip tanpa klasifikasi, retensi yang lewat jatuh tempo, penyusutan yang tertunda, dan hasil verifikasi jejak audit. Laporan berkala disusun dari data yang sama.",
     metaDescription:
       "Dasbor kepatuhan kearsipan, laporan operasional untuk pelanggan, laporan berkala untuk regulator, dan draf ringkasan temuan berbantuan AI.",
-    photo: { src: "/images/laptop-collaboration.webp", alt: "Rekan kerja meninjau dasbor di layar laptop bersama" },
     heroMock: "reports",
     features: [
       {

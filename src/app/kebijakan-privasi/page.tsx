@@ -101,7 +101,7 @@ const sections: LegalSection[] = [
           Pilihan Anda disimpan di penyimpanan lokal peramban Anda agar banner tidak muncul di setiap halaman. Jika Anda mengizinkan, penyedia analitik dapat memasang
           cookie untuk mencatat halaman yang dikunjungi, jenis perangkat, dan perkiraan lokasi.
         </p>
-        <p>Penyedia analitik: [DATA ASLI: nama penyedia analitik dan lokasi pemrosesannya].</p>
+        <p>Penyedia analitik: Google Analytics 4 dari Google LLC. Data analitik dapat diproses di pusat data Google di luar Indonesia.</p>
         <p>
           Anda dapat mengubah pilihan kapan saja melalui tombol &ldquo;Pengaturan cookie&rdquo; di bagian bawah setiap halaman, atau melalui tombol berikut. Jika Anda
           menarik persetujuan, halaman dimuat ulang agar skrip analitik berhenti.
@@ -117,12 +117,15 @@ const sections: LegalSection[] = [
     title: "Penyimpanan dan masa simpan data",
     body: (
       <>
-        <p>Data dari form kontak dikirim ke [DATA ASLI: tujuan pengiriman form, misalnya email tim penjualan atau sistem CRM].</p>
+        <p>Data dari form kontak dikirim sebagai email ke alamat {site.email} melalui layanan pengiriman email Resend.</p>
         <p>
-          Data tersebut kami simpan selama [DATA ASLI: masa simpan data form kontak]. Setelah masa simpan berakhir, data dihapus atau dianonimkan, kecuali peraturan
-          perundang-undangan mewajibkan penyimpanan lebih lama.
+          Data tersebut kami simpan paling lama 2 tahun sejak komunikasi terakhir dengan Anda. Setelah masa simpan berakhir, data dihapus atau dianonimkan, kecuali
+          peraturan perundang-undangan mewajibkan penyimpanan lebih lama.
         </p>
-        <p>Log teknis server hanya mencatat status dan metadata teknis, tanpa isi pesan Anda.</p>
+        <p>
+          Log teknis server di penyedia hosting mencatat status dan metadata teknis. Bila pengiriman email sedang tidak tersedia, isi permintaan Anda dicatat sementara di
+          log tersebut agar tetap dapat kami tindak lanjuti, lalu terhapus sesuai masa simpan log penyedia hosting.
+        </p>
       </>
     ),
   },
@@ -135,7 +138,10 @@ const sections: LegalSection[] = [
           Kami hanya membagikan data pribadi kepada penyedia layanan yang membantu kami menyelenggarakan situs, seperti penyedia hosting, email, dan analitik. Mereka
           memproses data atas instruksi kami dan terikat kewajiban kerahasiaan.
         </p>
-        <p>Daftar penyedia layanan: [DATA ASLI: penyedia hosting, email atau CRM, dan analitik].</p>
+        <p>
+          Daftar penyedia layanan: Vercel Inc. (hosting situs), Resend (pengiriman email form kontak), dan Google LLC (analitik, hanya bila Anda memberi persetujuan
+          cookie).
+        </p>
         <p>
           Jika data pribadi diproses di luar wilayah hukum Negara Republik Indonesia, kami memastikan ketentuan transfer data pribadi dalam UU 27/2022 dipenuhi. Kami juga
           dapat mengungkapkan data pribadi bila diwajibkan oleh peraturan perundang-undangan atau perintah otoritas yang berwenang.
@@ -203,8 +209,6 @@ const sections: LegalSection[] = [
         <dl className="grid gap-x-6 gap-y-2 rounded-lg border border-border bg-mist p-5 text-[0.9375rem] sm:grid-cols-[11rem_minmax(0,1fr)]">
           <dt className="text-muted-foreground">Pengendali data</dt>
           <dd className="mb-2 font-medium text-navy sm:mb-0">{site.entity}</dd>
-          <dt className="text-muted-foreground">Pejabat pelindungan data</dt>
-          <dd className="mb-2 font-medium text-navy sm:mb-0">[DATA ASLI: nama atau fungsi pejabat pelindungan data pribadi, bila ditunjuk]</dd>
           <dt className="text-muted-foreground">Email</dt>
           <dd className="mb-2 font-medium text-navy sm:mb-0">{site.email}</dd>
           <dt className="text-muted-foreground">Alamat</dt>

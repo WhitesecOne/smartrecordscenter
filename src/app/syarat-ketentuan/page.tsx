@@ -151,7 +151,7 @@ const sections: LegalSection[] = [
         <p>Syarat dan ketentuan ini tunduk pada hukum Negara Republik Indonesia.</p>
         <p>
           Setiap perselisihan yang timbul akan diselesaikan terlebih dahulu secara musyawarah. Jika musyawarah tidak mencapai kesepakatan, perselisihan diselesaikan
-          melalui [DATA ASLI: forum penyelesaian sengketa, misalnya pengadilan negeri tertentu atau arbitrase].
+          melalui Pengadilan Negeri Jakarta Timur.
         </p>
       </>
     ),

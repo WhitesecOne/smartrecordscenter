@@ -6,7 +6,7 @@ import { notFound } from "next/navigation"
 import { ProductMock } from "@/components/product/mocks"
 import { Reveal } from "@/components/reveal"
 import { CtaBand, PageHero, Section, SectionHeading } from "@/components/section"
-import { moduleBySlug, modules, type Feature } from "@/lib/modules"
+import { moduleBySlug, modules, type Feature, type Photo } from "@/lib/modules"
 import { ogBase } from "@/lib/site"
 import { cn } from "@/lib/utils"
 
@@ -33,18 +33,28 @@ export async function generateMetadata({ params }: PageProps<"/modul/[slug]">): 
   }
 }
 
+// Digital infrastructure only, no people: each module page takes the next one in turn.
+const ctaPhotos: Photo[] = [
+  { src: "/images/laptop-dashboard.webp", alt: "Laptop menampilkan dasbor data" },
+  { src: "/images/server-drives.webp", alt: "Deretan unit penyimpanan server dengan lampu indikator" },
+  { src: "/images/laptop-dark.webp", alt: "Laptop menampilkan dasbor bertema gelap" },
+  { src: "/images/network-cables.webp", alt: "Kabel jaringan tertata di rak server" },
+  { src: "/images/data-center.webp", alt: "Lorong ruang server di pusat data" },
+  { src: "/images/server-racks.webp", alt: "Rak server berisi perangkat penyimpanan" },
+  { src: "/images/analytics-laptop.webp", alt: "Grafik analitik di layar laptop" },
+]
+
 const AiLabel = () => <span className="inline-flex h-6 items-center rounded-[5px] bg-brand-wash px-2 text-xs font-semibold text-brand-ink">Dibantu AI</span>
 
 export default async function ModulePage({ params }: PageProps<"/modul/[slug]">) {
   const m = moduleBySlug((await params).slug)
   if (!m) notFound()
-  // The audit log's hash column is its proof; that screen needs the full row, not the 7/12 column.
-  const wide = m.heroMock === "register"
   const related = m.related.map((s) => moduleBySlug(s)!)
+  const ctaPhoto = ctaPhotos[modules.indexOf(m) % ctaPhotos.length]
 
   return (
     <>
-      <PageHero crumbs={[{ href: "/modul", label: "Modul" }, { label: m.name }]} title={m.title} lead={m.lead} photo={m.photo} />
+      <PageHero crumbs={[{ href: "/modul", label: "Modul" }, { label: m.name }]} title={m.title} lead={m.lead} tone="navy" visual={<ProductMock k={m.heroMock} />} />
 
       <nav aria-label={`Bagian modul ${m.name}`} className="sticky top-16 z-20 border-b border-border bg-white/95 lg:top-[6.75rem]">
         <div className="container-page">
@@ -61,8 +71,8 @@ export default async function ModulePage({ params }: PageProps<"/modul/[slug]">)
       </nav>
 
       <Section id="ringkasan" className="scroll-mt-40">
-        <div className={cn("grid gap-12 lg:gap-16", !wide && "lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]")}>
-          <div className={cn(wide && "grid gap-x-16 gap-y-8 lg:grid-cols-2")}>
+        <div>
+          <div className="grid gap-x-16 gap-y-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
             <div>
               <span className="flex size-12 items-center justify-center rounded-lg bg-brand text-white">
                 <m.icon className="size-6" aria-hidden />
@@ -71,7 +81,7 @@ export default async function ModulePage({ params }: PageProps<"/modul/[slug]">)
               <p className="lead mt-4 text-body">{m.short}</p>
             </div>
             <div>
-              <ul className={cn("divide-y divide-border border-y border-border", !wide && "mt-8")}>
+              <ul className="divide-y divide-border border-y border-border">
                 {m.features.map((f) => (
                   <li key={f.id}>
                     <a href={`#${f.id}`} className="group flex items-center justify-between gap-4 py-3.5">
@@ -90,9 +100,6 @@ export default async function ModulePage({ params }: PageProps<"/modul/[slug]">)
               </p>
             </div>
           </div>
-          <Reveal className="min-w-0 lg:pt-2">
-            <ProductMock k={m.heroMock} />
-          </Reveal>
         </div>
       </Section>
 
@@ -155,12 +162,37 @@ export default async function ModulePage({ params }: PageProps<"/modul/[slug]">)
         </div>
       </Section>
 
-      <CtaBand title={`Lihat modul ${m.name} bekerja pada arsip Anda`} photo={related[0].photo} />
+      <CtaBand title={`Lihat modul ${m.name} bekerja pada arsip Anda`} photo={ctaPhoto} />
     </>
   )
 }
 
 function FeatureSection({ f, tone, flip, inHero }: { f: Feature; tone: "mist" | "white"; flip: boolean; inHero: boolean }) {
+  // The audit log's hash column is its proof; that screen needs the full row, not the 7/12 column.
+  if (f.mock === "register")
+    return (
+      <section id={f.id} className={cn("scroll-mt-40 py-16 lg:py-24", tone === "mist" && "bg-mist")}>
+        <div className="container-page">
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
+            <div>
+              <h2 className="h2">{f.name}</h2>
+              <p className="lead mt-5 text-body">{f.desc}</p>
+            </div>
+            <ul className="flex flex-col gap-3 lg:pt-2">
+              {f.points.map((p) => (
+                <li key={p} className="flex gap-3 text-[0.9375rem] leading-relaxed">
+                  <CheckIcon className="mt-1 size-4 shrink-0 text-brand" aria-hidden />
+                  {p}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <Reveal className="mt-12 min-w-0">
+            <ProductMock k={f.mock} />
+          </Reveal>
+        </div>
+      </section>
+    )
   const text = (
     <div>
       <h2 className="h2">{f.name}</h2>

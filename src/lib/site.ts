@@ -4,8 +4,8 @@ export const site = {
   description:
     "Smart Records Center adalah platform tata kelola arsip digital: repositori terstruktur per organisasi, pencarian teks lengkap, metadata standar, klasifikasi, retensi dan penyusutan, jejak audit yang tidak dapat diubah, serta pelaporan kepatuhan, dengan AI yang usulannya selalu ditinjau manusia.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
-  // Contact details supplied by the owner on 2026-10-06 (provisional). Still [DATA ASLI]: legal entity.
-  entity: "[DATA ASLI: nama badan hukum]",
+  // Contact details and entity name supplied by the owner on 2026-10-06 (provisional until the legal entity is registered).
+  entity: "Smart Records Center",
   address: "Jl. Raya Ceger, Jl. H. Baneng No. 4, RT.6/RW.3, Ceger, Kec. Cipayung, Kota Jakarta Timur, DKI Jakarta 13880",
   email: "hqonitah@gmail.com",
   phone: "+62 816-744-953",
@@ -49,7 +49,7 @@ export const sectors: Sector[] = [
     href: "/industri#korporasi",
     label: "Korporasi",
     desc: "Kontrak, SDM, dan keuangan tertata dengan hak akses per unit dan per anak perusahaan.",
-    photo: { src: "/images/meeting-room.webp", alt: "Ruang rapat kantor berdinding kaca dengan meja bundar" },
+    photo: { src: "/images/office-curve.webp", alt: "Gedung perkantoran berdinding kaca melengkung" },
   },
 ]
 

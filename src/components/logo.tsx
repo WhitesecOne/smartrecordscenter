@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils"
 
-// Provisional mark until the owner supplies a logo ([DATA ASLI: logo]): stacked record sheets, the top one filed.
+// Provisional mark until the owner supplies a logo: stacked record sheets, the top one filed.
 export function LogoMark({ className, inverse }: { className?: string; inverse?: boolean }) {
   const bg = inverse ? "#fff" : "var(--navy)"
   const fg = inverse ? "var(--navy)" : "#fff"

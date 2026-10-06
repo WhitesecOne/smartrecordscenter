@@ -37,15 +37,16 @@ const principles = [
   { title: "Bahasa yang jelas dan formal", text: "Kami memakai bahasa yang lugas dan tepat, yang dapat dipercaya arsiparis maupun auditor." },
 ]
 
-/** Visible slot for company facts the owner has not supplied yet. */
-function Placeholder({ children }: { children: React.ReactNode }) {
-  return <p className="rounded-lg border border-dashed border-navy/30 bg-white px-4 py-3 text-[0.9375rem] font-medium text-navy">{children}</p>
-}
+const mission = [
+  "Menjalankan aturan kearsipan pada setiap arsip secara otomatis, sejak arsip diterima sampai nasib akhirnya.",
+  "Membuat setiap tindakan, oleh manusia maupun sistem, tercatat sebagai bukti yang dapat diverifikasi.",
+  "Memakai AI untuk pekerjaan berulang, dengan keputusan akhir tetap di tangan arsiparis.",
+  "Menjaga data setiap organisasi terpisah, terenkripsi, dan hanya dapat diakses oleh yang berwenang.",
+]
 
 export default function TentangKamiPage() {
   const legal = [
-    ["Nama badan hukum", site.entity],
-    ["Nomor Induk Berusaha (NIB)", "[DATA ASLI: NIB]"],
+    ["Nama", site.entity],
     ["Alamat kantor", site.address],
     ["Email", site.email],
     ["Telepon", site.phone],
@@ -102,43 +103,26 @@ export default function TentangKamiPage() {
       </Section>
 
       <Section id="profil">
-        <SectionHeading title="Profil perusahaan" lead="Informasi resmi tentang perusahaan yang mengembangkan dan menyelenggarakan Smart Records Center." />
-
-        <div className="mt-12 grid gap-10 lg:grid-cols-2 lg:gap-16">
+        <div className="grid gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
           <div>
-            <h3 className="text-xl font-bold">Sejarah</h3>
-            <div className="mt-4">
-              <Placeholder>[DATA ASLI: sejarah singkat perusahaan, tahun berdiri, dan latar belakang pendirian]</Placeholder>
-            </div>
+            <SectionHeading title="Visi dan misi" />
+            <p className="mt-8 font-heading text-2xl leading-snug font-bold text-navy">
+              Menjadi platform tata kelola arsip digital yang dipercaya organisasi teregulasi di Indonesia.
+            </p>
           </div>
-          <div>
-            <h3 className="text-xl font-bold">Visi dan misi</h3>
-            <div className="mt-4 flex flex-col gap-3">
-              <Placeholder>[DATA ASLI: visi resmi perusahaan]</Placeholder>
-              <Placeholder>[DATA ASLI: misi resmi perusahaan]</Placeholder>
-            </div>
-          </div>
-        </div>
-
-        <div className="mt-16">
-          <h3 className="text-xl font-bold">Pimpinan</h3>
-          <ul className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {[1, 2, 3].map((n) => (
-              <li key={n}>
-                <div className="flex aspect-[4/3] items-center justify-center rounded-xl border border-dashed border-navy/30 bg-mist px-4 text-center text-sm font-medium text-navy"
-                >
-                  [DATA ASLI: foto resmi]
-                </div>
-                <p className="mt-4 font-semibold text-navy">[DATA ASLI: nama]</p>
-                <p className="mt-1 text-[0.9375rem]">[DATA ASLI: jabatan]</p>
+          <ol className="flex flex-col">
+            {mission.map((m, i) => (
+              <li key={m} className="grid grid-cols-[2.5rem_minmax(0,1fr)] gap-3 border-t border-border py-5 first:border-t-0 first:pt-0">
+                <span className="flex size-8 items-center justify-center rounded-full bg-navy text-sm font-bold text-white">{i + 1}</span>
+                <p className="pt-1 leading-relaxed">{m}</p>
               </li>
             ))}
-          </ul>
+          </ol>
         </div>
 
-        <div className="mt-16 grid gap-8 border-t border-border pt-10 lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)] lg:gap-16">
-          <h3 className="text-xl font-bold">Legalitas dan kantor</h3>
-          <dl className="grid gap-5 sm:grid-cols-[14rem_minmax(0,1fr)] sm:gap-x-8">
+        <div className="mt-16 grid gap-8 border-t border-border pt-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
+          <h3 className="text-xl font-bold">Kantor dan kontak</h3>
+          <dl className="grid gap-5 sm:grid-cols-[10rem_minmax(0,1fr)] sm:gap-x-8">
             {legal.map(([k, v]) => (
               <div key={k} className="sm:contents">
                 <dt className="text-[0.9375rem] text-muted-foreground">{k}</dt>

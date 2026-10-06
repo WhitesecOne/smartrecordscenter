@@ -21,10 +21,10 @@ const tiles = [
 ]
 
 /** Hero "screenshot": the overview screen of the records application. */
-export function DashboardMock({ className }: { className?: string }) {
+export function DashboardMock({ className, title = "Pelaporan · Ringkasan Operasional" }: { className?: string; title?: string }) {
   const rows = sampleRecords.slice(0, 5)
   return (
-    <MockFrame title="Pelaporan · Ringkasan Operasional" className={className}>
+    <MockFrame title={title} className={className}>
       <div className="flex text-[13px]">
         <nav aria-hidden className="hidden w-44 shrink-0 flex-col gap-0.5 border-r border-border bg-mist/60 p-3 sm:flex">
           {nav.map(({ icon: Icon, label, on }) => (

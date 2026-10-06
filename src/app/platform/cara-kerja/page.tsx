@@ -75,7 +75,7 @@ export default function HowItWorksPage() {
         crumbs={[{ href: "/platform", label: "Platform" }, { label: "Cara Kerja" }]}
         title="Perjalanan satu arsip, dari diterima sampai nasib akhir"
         lead="Setiap tahap punya aturan yang dijaga sistem, modul yang mengerjakannya, dan bukti yang tercatat. Tidak ada tahap yang bergantung pada ingatan seseorang."
-        photo={{ src: "/images/open-office-screens.webp", alt: "Ruang kerja terbuka dengan layar yang menampilkan grafik data" }}
+        photo={{ src: "/images/laptop-dark.webp", alt: "Laptop menampilkan dasbor bertema gelap" }}
       />
 
       <Section tone="mist">

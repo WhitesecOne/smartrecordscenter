@@ -2,10 +2,12 @@ import type { Metadata, Viewport } from "next"
 import { Red_Hat_Display, Red_Hat_Mono, Red_Hat_Text } from "next/font/google"
 
 import { CookieConsent } from "@/components/cookie-consent"
+import { JsonLd } from "@/components/json-ld"
 import { MotionProvider } from "@/components/motion-provider"
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
 import { StickyCta } from "@/components/sticky-cta"
+import { siteGraph } from "@/lib/seo"
 import { site } from "@/lib/site"
 
 import "./globals.css"
@@ -31,6 +33,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="id" data-scroll-behavior="smooth" className={`${display.variable} ${text.variable} ${mono.variable}`}>
       <body className="min-h-dvh">
+        <JsonLd data={siteGraph()} />
         <MotionProvider>
           <SiteHeader />
           <main id="konten" tabIndex={-1} className="outline-none">

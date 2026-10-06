@@ -61,7 +61,7 @@ export default function ArchitecturePage() {
         crumbs={[{ href: "/platform", label: "Platform" }, { label: "Arsitektur & Integrasi" }]}
         title="Arsitektur yang menjaga aturan dan bukti di satu tempat"
         lead="Platform dirancang berlapis: aplikasi web di depan, satu layanan API yang menegakkan aturan kearsipan dan pemisahan organisasi, data terenkripsi di belakangnya, dan worker terisolasi untuk memproses isi dokumen."
-        photo={{ src: "/images/operator-desk.webp", alt: "Pegawai bekerja di depan komputer di ruang kantor berdinding kaca" }}
+        photo={{ src: "/images/server-drives.webp", alt: "Deretan unit penyimpanan server dengan lampu indikator" }}
       />
 
       <Section>
@@ -85,7 +85,7 @@ export default function ArchitecturePage() {
         <SectionHeading title="Opsi penerapan" lead="Model hosting menentukan lokasi data, pengelolaan kunci, dan pembagian peran menurut UU PDP. Pilihan ini ditetapkan bersama organisasi Anda." />
         <div className="mt-10 grid gap-4 md:grid-cols-3">
           {[
-            ["Cloud", "Dikelola penyedia layanan. Lokasi pusat data dan penyedia: [DATA ASLI]."],
+            ["Cloud", "Dikelola penyedia layanan cloud, dengan lokasi pusat data yang disepakati bersama organisasi Anda."],
             ["On-premise", "Dipasang di pusat data organisasi, dengan kunci enkripsi di HSM milik organisasi."],
             ["Hibrida", "Aplikasi dikelola, sementara data dan kunci tetap di lingkungan organisasi."],
           ].map(([t, d]) => (
@@ -131,7 +131,7 @@ export default function ArchitecturePage() {
         </div>
       </Section>
 
-      <CtaBand photo={{ src: "/images/data-center.webp", alt: "Lorong ruang server di pusat data" }} title="Diskusikan arsitektur dengan tim TI Anda" lead="Kami siapkan sesi teknis tentang lokasi data, integrasi identitas, dan pengelolaan kunci sesuai kebijakan organisasi Anda." />
+      <CtaBand photo={{ src: "/images/network-cables.webp", alt: "Kabel jaringan tertata di rak server" }} title="Diskusikan arsitektur dengan tim TI Anda" lead="Kami siapkan sesi teknis tentang lokasi data, integrasi identitas, dan pengelolaan kunci sesuai kebijakan organisasi Anda." />
     </>
   )
 }

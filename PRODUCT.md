@@ -40,7 +40,8 @@ Records-management vocabulary (use the Indonesian terms on the site, not English
 
 - Current focus (user, 2026-09-26): the complete public website, final and formal, Bahasa Indonesia first. English version comes later. A demo app with sample data is deferred.
 - Page set (2026-10-06): Beranda; Modul index + 7 module pages; Platform (Ikhtisar, Cara Kerja, Arsitektur & Integrasi, Keamanan & Kepatuhan); Industri (was Solusi; /solusi redirects); Mengapa Kami; Tentang Kami; Kontak/Minta Demo; Terima Kasih; Kebijakan Privasi; Syarat & Ketentuan; 404. Header: Modul, Platform, Industri, Perusahaan, Kontak, Minta Demo.
-- Visual direction (user, 2026-10-06): formal corporate, photo-led (real licensed photography of archives, institutions, and people at work), craft bar IBM / Microsoft Purview / OpenText. Photos come from free-license sources with recorded provenance, never from Google image search.
+- Visual direction (user, 2026-10-06, revised the same day): formal corporate, craft bar IBM / Microsoft Purview / OpenText. The product's own screens are the primary visual (home hero is the dashboard mockup, module heroes show each module's screen). Photography only shows digital infrastructure and buildings: no people and no physical-archive objects (shelves, paper, binders). Photos come from free-license sources with recorded provenance, never from Google image search.
+- Placeholders (user, 2026-10-06): no visible [DATA ASLI] markers. Legal entity name is "Smart Records Center" until a registered entity exists; facts that cannot be invented (NIB, leaders, history, certifications) are omitted rather than faked.
 - Undecided: company/legal entity name, pricing model, certifications held, integrations actually supported, hosting model (cloud/on-prem).
 
 ## Brand Commitments
